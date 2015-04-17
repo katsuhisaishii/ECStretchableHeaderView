@@ -69,6 +69,10 @@
 
 - (void)didTap:(id)sender
 {
+    if( _tapToExpand == NO ){
+        return;
+    }
+    
     CGPoint newOffset = self.attachedScrollView.contentOffset;
     newOffset.y -= self.maxHeight - CGRectGetHeight(self.frame);
     [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
