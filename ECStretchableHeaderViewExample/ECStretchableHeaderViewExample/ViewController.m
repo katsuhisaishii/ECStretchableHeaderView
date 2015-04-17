@@ -22,12 +22,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    self.tableView.contentInset = UIEdgeInsetsMake(-100, 0, 0, 0);
+//    self.tableView.contentOffset = CGPointMake(0, -100);
+    self.tableView.showsVerticalScrollIndicator = NO;
     self.headerView.maxHeight = 320;
     self.headerView.minHeight = 100;
     self.headerView.layer.borderColor = [UIColor redColor].CGColor;
     self.headerView.layer.borderWidth = 3.0f;
     self.headerView.heightConstraint = self.headerViewHeightConstraint;
-    [self.headerView attachToScrollView:self.tableView inset:100.0f];
+    [self.headerView attachToScrollView:self.tableView inset:0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,7 +52,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 200;
+    return 2;
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
