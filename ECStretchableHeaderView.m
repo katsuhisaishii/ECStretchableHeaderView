@@ -136,6 +136,7 @@
         prop.readBlock = ^(id obj, CGFloat values[]) {
             values[0] = [obj bounds].origin.x;
             values[1] = [obj bounds].origin.y;
+            //            NSLog(@"%@",NSStringFromCGRect([obj bounds]));
         };
         // write value, get data from Pop, and apply it to the view
         prop.writeBlock = ^(id obj, const CGFloat values[]) {
@@ -165,6 +166,7 @@
             else
                 tempBounds.origin.y = values[1];
             
+            //            NSLog(@"%@",NSStringFromCGSize(CGSizeMake(0.0f, values[1])));
             [self _scrollView:_attachedScrollView offsetChanged:@{@"new":[NSValue valueWithCGSize:CGSizeMake(0.0f, values[1])], @"old":[NSValue valueWithCGSize:CGSizeMake(0.0f, values[1])]}];
             [obj setBounds:tempBounds];
         };
@@ -206,7 +208,9 @@
 - (void)_performBounceBackToTopAnimation
 {
     POPBasicAnimation *basicAnimation = [self _bounceBackAnimation];
-    basicAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.attachedScrollView.contentOffset.x, - CGRectGetHeight(self.frame) - _inset)];
+    CGPoint toValuePoint = CGPointMake(self.attachedScrollView.contentOffset.x, - CGRectGetHeight(self.frame) - _inset + self.minHeight);
+    //    NSLog(@"%@",NSStringFromCGPoint(toValuePoint));
+    basicAnimation.toValue = [NSValue valueWithCGPoint:toValuePoint];
     [self.attachedScrollView pop_addAnimation:basicAnimation forKey:@"bounceBack"];
 }
 
